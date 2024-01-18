@@ -20,6 +20,7 @@ type FiltersType = {
     inVacations: string;
     createdAfter: Dayjs | null;
     createdBefore: Dayjs | null;
+    name: string;
 };
 
 const transformFiltersToURL = (filters: FiltersType): string => {
@@ -50,6 +51,7 @@ const Filters = ({ setUrlFilters, setSort, sort }: Props) => {
         inVacations: '',
         createdAfter: null,
         createdBefore: null,
+        name: ''
     };
     const [open, setOpen] = useState<boolean>(false);
     const [filters, setFilters] = useState<FiltersType>(defaultFilters);
@@ -87,6 +89,16 @@ const Filters = ({ setUrlFilters, setSort, sort }: Props) => {
 
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>Filtrer les boutiques</DialogTitle>
+
+                <input 
+                  type="text" 
+                  value={filters.name} 
+                  placeholder='Rechercher par nom..' 
+                  onChange={(e) => handleChange('name', e.target.value)}
+                  style={{
+                    padding: '8px'
+                  }}
+                />
 
                 <DialogContent>
                     <FormControl fullWidth sx={{ marginTop: 2 }}>
